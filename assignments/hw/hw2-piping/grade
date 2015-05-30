@@ -1,1 +1,39 @@
-/ 100
+100/ 100
+Last update Mon May 18 00:22:12 2015 -0700
+
+-----------------------------------------------------
+[1]  Input redirection from an existant file (25)
+¤¤¡¡¡¡¡Bienvenidos a la terminál rshell de Chirag!!!!!¤¤
+
+-----------------------------------------------------
+[2]  Output redirection (>) to an non-existant file (15)
+
+-----------------------------------------------------
+[3]  Output append (>>) to an existing file (10)
+
+-----------------------------------------------------
+[4]  Command with one pipe (15)
+
+-----------------------------------------------------
+[5]  Command with more than one pipe (15)
+
+-----------------------------------------------------
+[6]  Input redirection with piping (5)
+
+-----------------------------------------------------
+[7]  Output redirection and piping (5)
+
+-----------------------------------------------------
+[8]  Input redirection, output redirection, and piping (10)
+
+-----------------------------------------------------
+  Extra 1: <<< (20)
+  -20: Does not work!
+
+-----------------------------------------------------
+  Extra 2 (20)
+-10: $.*2>> test missing
+  -5: 1> Does not work!
+  -5: 1>> Does not work!
+  -5: 2> Does not work!
+  -5: 2>> Does not work!
