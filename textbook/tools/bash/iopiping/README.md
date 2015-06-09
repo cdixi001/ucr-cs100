@@ -2,17 +2,19 @@
 A non-comprehensive explanation of piping and input/output redirection and some useful examples with explanations.
 
 ##What You Should Already Know
-link to io redirection tutorial here
-link to piping tutorial here
-link to grep tutorial here
+input/output redirection tutorial: [the linux documentation's I/O redirection guide] (http://www.tldp.org/LDP/abs/html/io-redirection.html) 
+
+piping tutorial: [a video from previous cs100 students] (https://www.youtube.com/watch?v=uHH7nHkgZ4w)
+
+grep tutorial: [a link to some bash documentation along with some examples] (http://ss64.com/bash/grep.html)
 
 ##Let's Begin!
 Input/Output redirection and piping make life infinitely easier by changing the flow of information between programs.
 They accomplish this by changing file descriptors.
 
 ##Input/Output Examples
-Input and Output operators establish communication between a program and a file.
-Remember that the input and output operators can only be used on files! See linkhere for more information on input/output operators.
+Input and output operators establish communication between a program and a file.
+Remember that the input and output operators can only be used on files!
 ```
 ls -l < inputfile
 ```
@@ -78,7 +80,7 @@ sed 's/word1/word2/g' < file1 > file2
 This places the contents of `file1` in `file2` with all instances of `word1` replaced with `word2`.
 `file1` does not change.
 `sed` is a particularly interesting and important command for searching and replacing.
-It has many features which you can read about [here] (LINK HERE).  
+It has many features which you can read about [here] (https://github.com/mikeizbicki/ucr-cs100/tree/2015spring/textbook/tools/bash/sed).  
 
 &nbsp;
 
@@ -105,7 +107,7 @@ This command prints all the currently logged on users on different lines.
 tr -cs "A-Za-z0-9" "\n" < inputfile | sort | uniq -c | sort -n -r
 ```
 This command prints how many times each word in inputfile is used.  
-The translate command, `tr`, is very useful (see `man tr`).  
+The translate command, `tr`, is very useful (see [`man tr`] (http://ss64.com/bash/tr.html)).  
 The pattern "A-Za-z0-9" finds every word by making `tr` only grab things in the ranges of capital letters, lowercase letters, and numbers.  
 Then we insert a `newline` after each of those words.  
 Since `uniq` only removes duplicates that are next to each other, we must presort the words.  
@@ -129,7 +131,8 @@ ps | grep '.out' | awk '(print $1)' | xargs kill
 
 This command kills all processes whose name contains ".out".   
 We use `awk` to get the process ID's as ps lists the process ID's in the first column.  
-`xargs` takes in a stream of files or process ID's from `stdin` and applies a bash command to all of them. In this case, we are applying `kill` to all of them.  
+`xargs` takes in a stream of files or process ID's from `stdin` and applies a bash command to all of them. 
+In this case, we are applying `kill` to all of them.  
 For example, if we want to delete all the cpp files in the current directory, instead of  
 `rm file1.cpp file2.cpp file3.cpp file4.cpp ...`  
 We can use  
