@@ -67,7 +67,7 @@ There isn't really a best way either.
 The best way is a subjective balance of shortness and readability.
 This next command does the same thing as the previous command.
 ```
-cat inputfile | grep 'cs100' | sort >> outputfile
+$ cat inputfile | grep 'cs100' | sort >> outputfile
 ```
 It first prints `inputfile` to `stdout`, searches for "cs100", and then sorts those lines into `outputfile`.
 The previous command sorted `inputfile` first, then selected lines containing "cs100" into `outputfile`.
