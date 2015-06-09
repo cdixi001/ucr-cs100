@@ -116,15 +116,15 @@ history | awk '{print $2}' | sort | uniq -c | sort -nr | head
 This command lists your top 10 commands from history and how many times each command has been used.  
 `awk '{print $2}'` reads from history and only outputs the second word of each line.  
 Lastly, the `head` command prints only the first 10 lines.  
-  
-
-
-
-
-
-
-
-
+    
+      
+      
+     
+      
+       
+      
+      
+     
 ```
 ps | grep '.out' | awk '(print $1)' | xargs kill
 ```
