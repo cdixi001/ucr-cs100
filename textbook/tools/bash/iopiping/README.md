@@ -1,5 +1,4 @@
 #Piping and IO Redirection Examples
-Whats up homie dogs? One line commands using the principles of piping and input/output redirection with explanations of their significance.
 
 ##What You Should Already Know
 link to io redirection tutorial here
@@ -9,27 +8,29 @@ link to grep tutorial here
 ##Let;s Begin!
 Fun and engaging sentence or rhetorical question here
 
-Input/Output redirection and piping, as you should already know, make life infinitely easier by changing the flow of information between programs. They accomplish this by changing file descriptors.
+Input/Output redirection and piping, as you should already know, make life infinitely easier by changing the flow of information between programs.
+They accomplish this by changing file descriptors.
 
 ##Input/Output Examples
 Input and Output operators establish communication between a program and a file.
 Remember that the input and output operators can only be used on files! See linkhere for more information on input/output operators.
 ```
-cat < inputfile
+sort < inputfile
 ```
-This command simply prints the contents of inputfile to the screen.
+This command sorts the contents of inputfile based on the first letter in each line.
+We can specify different flags (see `man sort`) to change how the lines are sorted.
 
 
 ```
 ls > outputfile
 ```
-This command will print nothig to the screen, but outputfile will contain the name of every file in the current directory on a new line.
+This command will print nothing to the screen, but outputfile will contain the name of every file in the current directory on a new line.
 
 
 ```
-cat < inputfile > outputfile
+sort < inputfile > outputfile
 ```
-This command prints nothing to the screen. The contents of inputfile are now also in outputfile.
+This command prints nothing to the screen. Outputfile contains the contents of inputfile in sorted order.
 
 
 
@@ -42,7 +43,8 @@ For example
 ```
 ls | grep cpp
 ```
-This command takes the ouput of `ls` and feeds it to `grep cpp`. `ls` will list all the files in the current directory and of thsoe files, grep will only display the ones that contain "cpp".
+This command takes the ouput of `ls` and feeds it (technically pipes it) to `grep cpp`.
+`ls` lists all the files in the current directory and of those files, grep will only display the ones that contain "cpp".
 
 ```
 output goes here
@@ -53,8 +55,14 @@ Piping is often used in conjunction with `grep` or `sed` for finding phrases in 
 This is nothing to be scared of. Some sentence here explaining it is simple. IO involves program and file and that program can be used as one side of a pipe commad.
 
 ```
-cat < inputfile | ls -l > outputfile
+sort < inputfile | grep 'cs100'
 ```
+All the lines in inputfile containing `cs100` are displayed in sorted order.
+
+With piping and IO Redirection, there isn't ever just one way to do things.
+There isn't really a best way either.
+The best way is a subjective balance of shortness and readability.
+
 Probably better to just show output than explain with a giant paragraph. At the end of this command, outputfile looks like this:
 ```
 outputfile contents here
@@ -64,12 +72,19 @@ outputfile contents here
 ```
 sed 's/word1/word2/g' < file1 > file2
 ```
-Places contents of `file1` in `file2` with all instances of `word1` replaced with `word2`. `file1` does not change. Talk about importance of sed command + link to sed tutorial.
+Places contents of `file1` in `file2` with all instances of `word1` replaced with `word2`.
+`file1` does not change.
+`sed` is a particularly interesting and important command for searching and replacing.
+It has many features which you can read about [here] (LINK HERE).
+
 
 ```
 ls -lR | grep .cpp | vim -
 ```
-This command looks recursively through the current directory and finds any .cpp files. The files and their information will then be presented on vim rather than stdout. The `grep .cpp` portion of the code may be modified for any string in file names. 
+This command looks recursively through the current directory and displays only the lines that contain "cpp" in vim (instead of the screen).
+The `-` is a `vim` parameter that tells `vim` that the file to edit is read from `stdin`.
+The `grep .cpp` portion of the code may be modified for any string in file names.
+
 
 ```
 ps | grep problemprocess | grep -v grep | awk '(print $2)' | xargs kill
