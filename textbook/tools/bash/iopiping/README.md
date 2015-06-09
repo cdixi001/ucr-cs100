@@ -1,5 +1,5 @@
 #Piping and IO Redirection Examples
-
+A non-comprehensive explanation of piping and input/output redirection and some useful examples with explanations.
 
 ##What You Should Already Know
 link to io redirection tutorial here
@@ -7,8 +7,6 @@ link to piping tutorial here
 link to grep tutorial here
 
 ##Let's Begin!
-Fun and engaging sentence or rhetorical question here
-
 Input/Output redirection and piping make life infinitely easier by changing the flow of information between programs.
 They accomplish this by changing file descriptors.
 
@@ -40,10 +38,10 @@ Outputfile contains detailed info about the files listed in inputfile.
 ##Piping
 Piping establishes communication between two programs.
 
-In `left | right`, the output of left acts as the input to right.
+In `left | right`, the output of `left` acts as the input to `right`.
 The pipe `|` connects `stdout` of `left` to `stdin` of `right`.
 
-For example
+For example:
 ```
 ls | grep cpp
 ```
@@ -128,7 +126,6 @@ Lastly, the `head` command prints only the first 10 lines.
 ```
 ps | grep '.out' | awk '(print $1)' | xargs kill
 ```
-http://unix.stackexchange.com/questions/30759
 
 This command kills all processes whose name contains ".out".   
 We use `awk` to get the process ID's as ps lists the process ID's in the first column.  
@@ -145,7 +142,7 @@ Which is much easier than typing everything out.
 wget --quiet -O - http://google.com/ | grep -oP 'http://[^"]*' | uniq | sort > outfile.txt
 ```
 This command gets all the links from a webpage and prints it to `outfile.txt`.   
-`grep` does most of the work with its powerful regular expression ability (read about regex [here] (linkhere)), but its input is from the wget command.  
+`grep` does most of the work with its powerful regular expression ability (read about regex [here] (https://github.com/mikeizbicki/ucr-cs100/tree/2015spring/textbook/tools/bash/regex)), but its input is from the wget command.  
 
 
 ##Conclusion
