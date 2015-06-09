@@ -1,72 +1,72 @@
 #Piping and IO Redirection Examples
 
+
 ##What You Should Already Know
 link to io redirection tutorial here
 link to piping tutorial here
 link to grep tutorial here
 
-##Let;s Begin!
+##Let's Begin!
 Fun and engaging sentence or rhetorical question here
 
-Input/Output redirection and piping, as you should already know, make life infinitely easier by changing the flow of information between programs.
+Input/Output redirection and piping make life infinitely easier by changing the flow of information between programs.
 They accomplish this by changing file descriptors.
 
 ##Input/Output Examples
 Input and Output operators establish communication between a program and a file.
 Remember that the input and output operators can only be used on files! See linkhere for more information on input/output operators.
 ```
-sort < inputfile
+ls -l < inputfile
 ```
-This command sorts the contents of inputfile based on the first letter in each line.
-We can specify different flags (see `man sort`) to change how the lines are sorted.
-
+Instead of printing all files/folders in the current directory with detailed info, this command will only print (with detailed info) the files/folders listed in `inputfile` (separated by newline).
 
 ```
 ls > outputfile
 ```
-This command will print nothing to the screen, but outputfile will contain the name of every file in the current directory on a new line.
+This command will print nothing to the screen, but `outputfile` will contain the name of every file in the current directory on a new line.
 
 
 ```
-sort < inputfile > outputfile
+ls -l < inputfile > outputfile
 ```
-This command prints nothing to the screen. Outputfile contains the contents of inputfile in sorted order.
+This command prints nothing to the screen.
+Outputfile contains detailed info about the files listed in inputfile.
 
 
 
 ##Piping
 Piping establishes communication between two programs.
 
-In ```left | right```, the output of left acts as the input to right.
+In `left | right`, the output of left acts as the input to right.
+The pipe `|` connects `stdout` of `left` to `stdin` of `right`.
 
 For example
 ```
 ls | grep cpp
 ```
 This command takes the ouput of `ls` and feeds it (technically pipes it) to `grep cpp`.
-`ls` lists all the files in the current directory and of those files, grep will only display the ones that contain "cpp".
+`ls` lists all the files in the current directory and of those files, grep will print to `stdout` the ones that contain "cpp".
 
-```
-output goes here
-```
-Piping is often used in conjunction with `grep` or `sed` for finding phrases in files. Sentence about regular expressions and link to tutorail.
+Piping is often used in conjunction with `grep` or `sed` for finding phrases in files.
+Sentence about regular expressions and link to tutorial.
 
 ##Piping and IO Redirection
-This is nothing to be scared of. Some sentence here explaining it is simple. IO involves program and file and that program can be used as one side of a pipe commad.
+IO involves program and file and that program can be used as one side of a pipe command.
 
 ```
-sort < inputfile | grep 'cs100'
+sort inputfile | grep 'cs100' >> outputfile
 ```
-All the lines in inputfile containing `cs100` are displayed in sorted order.
+All the lines in `inputfile` containing `cs100` appended to `outputfile` in sorted order.
 
-With piping and IO Redirection, there isn't ever just one way to do things.
+With shell commands, there is never just one way to do things.
 There isn't really a best way either.
 The best way is a subjective balance of shortness and readability.
+The following also appends all lines of `inputfile` containing `cs100` in sorted order to `outputfile`.
+```
+cat inputfile | grep 'cs100' | sort >> outputfile
+```
+It first prints `inputfile` to `stdout`, searches for "cs100", and then sorts those lines into `outputfile`.
 
-Probably better to just show output than explain with a giant paragraph. At the end of this command, outputfile looks like this:
-```
-outputfile contents here
-```
 
 ##Interesting Stuff
 ```
@@ -99,4 +99,5 @@ wget -O -http://izbicki.me/ | grep -E -o "\b[a-z A-Z 0-9.-] + @[a-z A-Z 0-9.-] +
 Link to quiz maybe? Or change it up a bit. Gets email addresses from a webpage. `grep` does most of the work with its powerful regular expression ability, but its input is from the wget command.
 
 ##Conclusion
-Programs become extremely useful when they can communicate with each other. By themselves, they are already powerful, but piping and i/o redirection give us a way to combine programs to perform otherwise complex tasks.
+Programs become extremely useful when they can communicate with each other.
+By themselves, they are already powerful, but piping and i/o redirection give us a way to combine programs to perform otherwise complex tasks.
