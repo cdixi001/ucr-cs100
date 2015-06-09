@@ -57,6 +57,7 @@ IO involves program and file and that program can be used as one side of a pipe 
 sort inputfile | grep 'cs100' >> outputfile
 ```
 All the lines in `inputfile` containing `cs100` appended to `outputfile` in sorted order.
+We can specify flags for `sort` (see `man sort`) to change how things are sorted.
 
 With shell commands, there is never just one way to do things.
 There isn't really a best way either.
@@ -77,7 +78,6 @@ Places contents of `file1` in `file2` with all instances of `word1` replaced wit
 `sed` is a particularly interesting and important command for searching and replacing.
 It has many features which you can read about [here] (LINK HERE).
 
-
 ```
 ls -lR | grep .cpp | vim -
 ```
@@ -85,18 +85,57 @@ This command looks recursively through the current directory and displays only t
 The `-` is a `vim` parameter that tells `vim` that the file to edit is read from `stdin`.
 The `grep .cpp` portion of the code may be modified for any string in file names.
 
+```
+users | sed s/' '/'\n'/g | uniq 
+```
+This command prints all the currently logged on users on different lines.
+`users` prints all the logged on users seperated by space.
+`sed` will search and replace each space with a newline.
+`uniq` will remove any duplicates and output each user only once.
 
 ```
-ps | grep problemprocess | grep -v grep | awk '(print $2)' | xargs kill
+tr -cs "A-Za-z0-9" "\n" < inputfile | sort | uniq -c | sort -n -r
+```
+This command prints how many times each word in inputfile is used.
+The translate command, `tr`, is very useful (see `man tr`).
+The pattern "A-Za-z0-9" finds every word by making `tr` only grab things in the ranges of capital letters, lowercase letters, and numbers.
+Then we insert a `newline` after each of those words.
+Since `uniq` only removes duplicates that are next to each other, we must presort the words.
+`uniq` normally outputs each word only once, but with the `-c` flag, it also prints the number of times the word occurs.
+For the second `sort`, `-n` sorts numerically and `-r` reverses the order to go least to greatest.
+
+```
+history | awk '{print $2}' | sort | uniq -c | sort -nr | head
+```
+This command lists your top 10 commands from history and how many times each command has been used.
+`awk '{print $2}'` reads from history and only outputs the second word of each line.
+Lastly, the `head` command prints only the first 10 lines.
+
+```
+ps | grep '.out' | awk '(print $1)' | xargs kill
 ```
 http://unix.stackexchange.com/questions/30759
 
-This command kills a process based on its name by obtaining its process id. Explanation of each pipe follows.
+This command kills all processes whose name contains ".out". 
+We use `awk` to get the process ID's as ps lists the process ID's in the first column.
+`xargs` takes in a stream of files or process ID's from `stdin` and applies a bash command to all of them. In this case, we are applying `kill` to all of them.
+For example, if we want to delete all the cpp files in the current directory, instead of
+```
+rm file1.cpp file2.cpp file3.cpp file4.cpp ...
+```
+We can use
+```
+ls | grep 'cpp' | xargs rm
+```
+Which is much easier than typing everything out.
+
 
 ```
-wget -O -http://izbicki.me/ | grep -E -o "\b[a-z A-Z 0-9.-] + @[a-z A-Z 0-9.-] + \.[a-z A-Z 0-9.-] + \b"
+wget --quiet -O - http://google.com/ | grep -oP 'http://[^"]*' | uniq | sort > outfile.txt
 ```
-Link to quiz maybe? Or change it up a bit. Gets email addresses from a webpage. `grep` does most of the work with its powerful regular expression ability, but its input is from the wget command.
+This command gets all the links from a webpage and prints it to outfile.txt. 
+`grep` does most of the work with its powerful regular expression ability, but its input is from the wget command.
+
 
 ##Conclusion
 Programs become extremely useful when they can communicate with each other.
