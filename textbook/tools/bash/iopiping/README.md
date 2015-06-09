@@ -118,6 +118,13 @@ This command lists your top 10 commands from history and how many times each com
 Lastly, the `head` command prints only the first 10 lines.  
   
 
+
+
+
+
+
+
+
 ```
 ps | grep '.out' | awk '(print $1)' | xargs kill
 ```
@@ -129,7 +136,7 @@ We use `awk` to get the process ID's as ps lists the process ID's in the first c
 For example, if we want to delete all the cpp files in the current directory, instead of  
 `rm file1.cpp file2.cpp file3.cpp file4.cpp ...`  
 We can use  
-`ls | grep 'cpp' | xargs rm`
+`ls | grep 'cpp' | xargs rm`    
 Which is much easier than typing everything out.  
   
 
